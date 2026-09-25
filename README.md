@@ -25,3 +25,7 @@ A Hackathon to Discover IBM Bob Premium Package for Z
 - Olivier VALLOD - Solution Architect & AI Engineer - IBM Client Engineering GEO (olivier.vallod@fr.ibm.com)
 - Stéphane FAURE - AI Engineer - IBM Client Engineering GEO (stef@fr.ibm.com)
 - Axel CHABAN - Tech Sales Z Devops - IBM Technology FRANCE (Axel.Chaban@ibm.com)
+
+---
+
+📝 [How to update the website](docs/HOW-TO-UPDATE.md)
