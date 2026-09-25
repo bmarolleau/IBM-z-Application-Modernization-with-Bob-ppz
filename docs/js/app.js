@@ -3,13 +3,7 @@
   // ── THEME TOGGLE ──────────────────────────────────────────────────────────
   var html = document.documentElement;
   var savedTheme = localStorage.getItem('bob4z-theme');
-  if (savedTheme) {
-    html.setAttribute('data-theme', savedTheme);
-  } else {
-    // Default: respect system preference, fall back to dark
-    var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-    html.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
-  }
+  html.setAttribute('data-theme', savedTheme || 'dark');
 
   var themeBtn = document.getElementById('theme-toggle-btn');
   if (themeBtn) {
