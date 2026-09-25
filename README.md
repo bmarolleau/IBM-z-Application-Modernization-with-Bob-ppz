@@ -1,6 +1,6 @@
 # Bob4z-a-thon
 
-> 🌐 **[Open the Lab Website](https://ovallod.github.io/Bob4z-a-thon-GSE/)** — interactive, copy-ready lab instructions with step-by-step exercises.
+> 🌐 **[Open the Lab Website](https://bmarolleau.github.io/IBM-z-Application-Modernization-with-Bob-ppz/)** — interactive, copy-ready lab instructions with step-by-step exercises.
 
 A Hackathon to Discover IBM Bob Premium Package for Z
 
