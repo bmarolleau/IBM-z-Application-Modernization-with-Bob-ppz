@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en" data-carbon-theme="white">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bob4Z-a-thon — Lab Summary Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet"/>
+  <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/version/v2.63.0/tag.min.js"></script>
+  <style>
+    :root {
+      --cds-background:#ffffff; --cds-layer-01:#f4f4f4; --cds-layer-02:#ffffff;
+      --cds-layer-hover-01:#e8e8e8; --cds-layer-selected-01:#e0e0e0;
+      --cds-border-subtle-00:#e0e0e0; --cds-border-subtle-01:#c6c6c6;
+      --cds-border-strong-01:#8d8d8d; --cds-border-interactive:#0f62fe;
+      --cds-text-primary:#161616; --cds-text-secondary:#525252;
+      --cds-text-helper:#6f6f6f; --cds-text-inverse:#ffffff;
+      --cds-link-primary:#0f62fe; --cds-interactive:#0f62fe;
+      --cds-background-brand:#0f62fe; --cds-background-inverse:#393939;
+      --cds-support-success:#24a148; --cds-support-warning:#f1c21b;
+      --cds-support-error:#da1e28; --cds-support-info:#0043ce;
+      --cds-highlight:#d0e2ff;
+      --cds-sp-01:.125rem; --cds-sp-02:.25rem; --cds-sp-03:.5rem;
+      --cds-sp-04:.75rem; --cds-sp-05:1rem; --cds-sp-06:1.5rem;
+      --cds-sp-07:2rem; --cds-sp-08:2.5rem; --cds-sp-09:3rem;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;font-size:.875rem;line-height:1.42857;background:var(--cds-layer-01);color:var(--cds-text-primary);-webkit-font-smoothing:antialiased}
+    code{font-family:'IBM Plex Mono','Courier New',monospace;font-size:.775rem;background:#e8e8e8;padding:.1em .35em;border-radius:2px;color:#161616}
+
+    /* UI Shell */
+    .cds-shell{background:var(--cds-background-inverse);color:var(--cds-text-inverse);height:3rem;display:flex;align-items:center;padding:0 var(--cds-sp-05);border-bottom:1px solid #4c4c4c;position:sticky;top:0;z-index:100}
+    .cds-shell__name{font-size:.875rem;font-weight:600;color:var(--cds-text-inverse);text-decoration:none;padding:0 var(--cds-sp-05) 0 0;border-right:1px solid #4c4c4c}
+    .cds-shell__name span{font-weight:300}
+    .cds-shell__nav{display:flex;align-items:center;gap:var(--cds-sp-05);margin-left:var(--cds-sp-05);font-size:.875rem;color:#c6c6c6}
+
+    /* Page header */
+    .ph{background:var(--cds-background);border-bottom:1px solid var(--cds-border-subtle-00);padding:var(--cds-sp-07) var(--cds-sp-08) var(--cds-sp-06)}
+    .ph__eyebrow{font-size:.75rem;color:var(--cds-text-helper);text-transform:uppercase;letter-spacing:.32px;margin-bottom:var(--cds-sp-03)}
+    .ph__title{font-size:1.75rem;font-weight:400;line-height:1.28572;margin-bottom:var(--cds-sp-04)}
+    .ph__desc{font-size:.875rem;color:var(--cds-text-secondary);max-width:62rem;margin-bottom:var(--cds-sp-05)}
+    .ph__stats{display:flex;gap:var(--cds-sp-07);margin-bottom:var(--cds-sp-06);flex-wrap:wrap}
+    .ph__stat{text-align:center}
+    .ph__stat-n{font-size:2rem;font-weight:300;line-height:1;color:var(--cds-background-brand)}
+    .ph__stat-l{font-size:.75rem;color:var(--cds-text-helper);margin-top:.2rem}
+    .ph__legend{display:flex;flex-wrap:wrap;gap:var(--cds-sp-03);align-items:center;border-top:1px solid var(--cds-border-subtle-00);padding-top:var(--cds-sp-05)}
+    .ph__legend-lbl{font-size:.75rem;color:var(--cds-text-helper);margin-right:var(--cds-sp-02)}
+
+    /* Difficulty chips */
+    .diff{display:inline-flex;align-items:center;gap:.25rem;font-size:.75rem;font-weight:600;padding:.1rem .5rem;border-radius:1rem;white-space:nowrap}
+    .diff-easy{background:#defbe6;color:#044317}
+    .diff-medium{background:#fdf6dd;color:#7d4e00}
+    .diff-advanced{background:#fff1f1;color:#a2191f}
+
+    /* Content */
+    .content{padding:var(--cds-sp-06) var(--cds-sp-08)}
+
+    /* Lab section */
+    .lab{margin-bottom:var(--cds-sp-07);background:var(--cds-background);border:1px solid var(--cds-border-subtle-00)}
+    .lab__hdr{display:flex;align-items:center;gap:var(--cds-sp-05);padding:var(--cds-sp-05) var(--cds-sp-06);background:var(--cds-background-inverse);border-bottom:3px solid var(--cds-background-brand)}
+    .lab__badge{width:2rem;height:2rem;border-radius:50%;background:var(--cds-background-brand);color:var(--cds-text-inverse);font-size:.875rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .lab__title-block{flex:1}
+    .lab__title{font-size:1rem;font-weight:600;color:var(--cds-text-inverse);line-height:1.375}
+    .lab__sub{font-size:.75rem;color:#a8a8a8;margin-top:2px}
+    .lab__dur{font-size:.75rem;background:rgba(255,255,255,.1);color:#c6c6c6;padding:.25rem .75rem;border:1px solid #4c4c4c;white-space:nowrap}
+
+    /* Data table */
+    .dt-wrap{overflow-x:auto}
+    .dt{width:100%;border-collapse:collapse;background:var(--cds-background)}
+    .dt thead th{background:var(--cds-layer-01);color:var(--cds-text-primary);font-size:.75rem;font-weight:600;text-align:left;padding:var(--cds-sp-04) var(--cds-sp-05);border-top:1px solid var(--cds-border-subtle-01);border-bottom:1px solid var(--cds-border-strong-01);white-space:nowrap}
+    .dt tbody tr{border-bottom:1px solid var(--cds-border-subtle-00);transition:background 70ms}
+    .dt tbody tr:hover{background:var(--cds-layer-hover-01)}
+    .dt td{padding:var(--cds-sp-04) var(--cds-sp-05);vertical-align:top;font-size:.875rem;line-height:1.42857}
+    .dt td.ex-cell{font-weight:600;color:var(--cds-link-primary);white-space:nowrap;min-width:9rem}
+    .ex-name{font-size:.875rem;font-weight:600;color:var(--cds-link-primary)}
+    .ex-desc{font-size:.75rem;font-weight:400;color:var(--cds-text-secondary);margin-top:.2rem}
+
+    /* Mode badge — prominent pill */
+    .mode-badge{display:inline-flex;align-items:center;gap:.35rem;background:var(--cds-background-brand);color:#fff;font-size:.75rem;font-weight:600;padding:.25rem .6rem;border-radius:2px;margin-bottom:var(--cds-sp-03);white-space:nowrap}
+    .mode-badge + .mode-badge{margin-left:.3rem}
+    .mode-badge svg{width:.875rem;height:.875rem;fill:#fff;flex-shrink:0}
+    .mode-label{font-size:.6875rem;font-weight:600;color:var(--cds-text-helper);text-transform:uppercase;letter-spacing:.32px;margin-bottom:var(--cds-sp-02);display:block}
+    .tag-group{display:flex;flex-wrap:wrap;gap:3px}
+    cds-tag{margin:1px;--cds-label-01-font-size:.6875rem}
+
+    /* Steps */
+    .steps{padding-left:var(--cds-sp-05);margin:0}
+    .steps li{margin-bottom:var(--cds-sp-02);color:var(--cds-text-primary)}
+    .steps li::marker{color:var(--cds-interactive)}
+
+    /* Insight */
+    .insight{display:block;margin-top:var(--cds-sp-04);font-size:.75rem;color:var(--cds-text-helper);font-style:italic;padding-left:var(--cds-sp-04);border-left:2px solid #009d9a}
+
+    /* Gain */
+    .gain{display:flex;align-items:center;gap:var(--cds-sp-03)}
+    .gain-pct{font-size:.75rem;font-weight:700;color:var(--cds-support-success);white-space:nowrap;min-width:2.5rem}
+    .gain-bar{flex:1;height:4px;background:var(--cds-layer-selected-01);border-radius:2px;min-width:2.5rem;max-width:4.5rem;overflow:hidden}
+    .gain-fill{height:100%;background:var(--cds-support-success);border-radius:2px}
+
+    /* Footer */
+    .foot{background:var(--cds-background-inverse);color:#a8a8a8;padding:var(--cds-sp-05) var(--cds-sp-08);font-size:.75rem;display:flex;flex-wrap:wrap;gap:var(--cds-sp-03);align-items:center;border-top:1px solid #4c4c4c;margin-top:var(--cds-sp-07)}
+    .foot strong{color:#fff}
+    .foot-sep{color:#4c4c4c}
+
+    @media(max-width:66rem){.content{padding:var(--cds-sp-05)}.ph{padding:var(--cds-sp-06) var(--cds-sp-05)}}
+  </style>
+</head>
+<body>
+
+<!-- UI Shell -->
+<header class="cds-shell" role="banner">
+  <a class="cds-shell__name" href="#">IBM Bob <span>Premium Package for Z</span></a>
+  <nav class="cds-shell__nav" aria-label="breadcrumb">
+    <span>Bob4Z-a-thon</span><span>›</span>
+    <span style="color:#fff">Lab Summary Guide</span>
+  </nav>
+</header>
+
+<!-- Page Header -->
+<div class="ph">
+  <p class="ph__eyebrow">IBM Bob Premium Package for Z · CBSA · z/OS · CICS · Db2 · Enterprise COBOL</p>
+  <h1 class="ph__title">🚀 Bob4Z-a-thon — Lab Summary Guide</h1>
+  <p class="ph__desc">For each exercise: Bob mode used, skills / workflows / tools, step-by-step user actions, expected deliverables with practitioner insights, difficulty level, and productivity gain.</p>
+  <div class="ph__stats">
+    <div class="ph__stat"><div class="ph__stat-n">4</div><div class="ph__stat-l">Labs</div></div>
+    <div class="ph__stat"><div class="ph__stat-n">28</div><div class="ph__stat-l">Exercises</div></div>
+    <div class="ph__stat"><div class="ph__stat-n">5</div><div class="ph__stat-l">Bob Modes</div></div>
+    <div class="ph__stat"><div class="ph__stat-n">6–9h</div><div class="ph__stat-l">Total Lab Time</div></div>
+    <div class="ph__stat"><div class="ph__stat-n">~93%</div><div class="ph__stat-l">Avg. Productivity Gain</div></div>
+  </div>
+  <div class="ph__legend">
+    <span class="ph__legend-lbl">Modes:</span>
+    <span class="mode-badge">💻 Agent</span>
+    <span class="mode-badge">🧰 Z Code</span>
+    <span class="mode-badge">📐 Z Architect</span>
+    <span style="width:1px;background:var(--cds-border-subtle-00);height:1.2rem;display:inline-block;margin:0 .5rem"></span>
+    <span class="ph__legend-lbl">Tags:</span>
+    <cds-tag type="teal" size="sm">Skill / Command</cds-tag>
+    <cds-tag type="purple" size="sm">Workflow</cds-tag>
+    <cds-tag type="green" size="sm">Premium Tool</cds-tag>
+    <span style="width:1px;background:var(--cds-border-subtle-00);height:1.2rem;display:inline-block;margin:0 .5rem"></span>
+    <span class="ph__legend-lbl">Difficulty:</span>
+    <span class="diff diff-easy">● Easy</span>
+    <span class="diff diff-medium">● Medium</span>
+    <span class="diff diff-advanced">● Advanced</span>
+  </div>
+</div>
+
+<main class="content">
+
+<!-- ══ LAB 1 ══ -->
+<section class="lab" aria-labelledby="l1">
+  <div class="lab__hdr">
+    <div class="lab__badge">1</div>
+    <div class="lab__title-block">
+      <div class="lab__title" id="l1">Discovering IBM Bob Premium Package for Z</div>
+      <div class="lab__sub">Analysis &amp; Documentation of a CICS Mainframe Application (CBSA base layer only)</div>
+    </div>
+    <span class="lab__dur">⏱ 2–3 h · Intermediate → Advanced</span>
+  </div>
+  <div class="dt-wrap"><table class="dt" aria-label="Lab 1">
+    <thead><tr>
+      <th style="width:11%">Exercise</th>
+      <th style="width:16%">Bob Mode &amp; Tools</th>
+      <th style="width:22%">User Actions</th>
+      <th style="width:28%">Expected Result</th>
+      <th style="width:8%">Difficulty</th>
+      <th style="width:9%">Gain</th>
+    </tr></thead>
+    <tbody>
+    <tr>
+      <td class="ex-cell"><div class="ex-name">Lab Prep</div><div class="ex-desc">Workspace Setup</div></td>
+      <td><span class="mode-badge">💻 Agent</span><br/><span class="mode-label">Tools</span><div class="tag-group"><cds-tag type="green" size="sm">git clone (automated)</cds-tag></div></td>
+      <td><ol class="steps"><li>Create ~/CBSA folder, open in Bob IDE</li><li>Prompt Bob to sparse-clone GitHub repo and copy <code>src/base</code></li><li>Bob cleans up temp directory automatically</li></ol></td>
+      <td>CBSA <code>cobol_src/</code>, <code>cobol_copy/</code>, <code>bms_src/</code> in workspace (5 min vs. 15–20 manual)<span class="insight">💬 A 20-minute README ritual replaced by one prompt.</span></td>
+      <td><span class="diff diff-easy">● Easy</span></td>
+      <td><div class="gain"><span class="gain-pct">~70%</span><div class="gain-bar"><div class="gain-fill" style="width:70%"></div></div></div></td>
+    </tr>
+    <tr>
+      <td class="ex-cell"><div class="ex-name">Exercise 0</div><div class="ex-desc">Naming &amp; Rules</div></td>
+      <td><span class="mode-badge">💻 Agent</span><br/><span class="mode-label">Tools</span><div class="tag-group"><cds-tag type="green" size="sm">.bob/rules.md</cds-tag></div></td>
+      <td><ol class="steps"><li>Open a new task</li><li>Prompt Bob to define directory &amp; naming conventions (docs/, tools/, graph/)</li><li>Bob creates/updates <code>.bob/rules.md</code> or <code>AGENTS.md</code></li></ol></td>
+      <td><code>AGENTS.md</code> / <code>.bob/rules.md</code> with naming format <code>[PREFIX]-[TYPE]-[desc].md</code> and examples<span class="insight">💬 Conventions that lived in a forgotten Confluence page are now version-controlled in the repo.</span></td>
+      <td><span class="diff diff-easy">● Easy</span></td>
+      <td><div class="gain"><span class="gain-pct">~60%</span><div class="gain-bar"><div class="gain-fill" style="width:60%"></div></div></div></td>
+    </tr>
+    <tr>
+      <td class="ex-cell"><div class="ex-name">Exercise 1</div><div class="ex-desc">Workspace Init &amp; Data Dictionary</div></td>
+      <td><span class="mode-badge">🧰 Z Code</span><br/><span class="mode-label">Workflow</span><div class="tag-group"><cds-tag type="purple" size="sm">Generate Data Dictionary</cds-tag></div><span class="mode-label" style="margin-top:.4rem">Tools</span><div class="tag-group"><cds-tag type="green" size="sm">scan_program</cds-tag><cds-tag type="green" size="sm">get_variables</cds-tag><cds-tag type="green" size="sm">edit_data_dictionary</cds-tag></div></td>
+      <td><ol class="steps"><li>Type <code>/init</code> — Bob analyzes workspace &amp; updates AGENTS.md</li><li>Click ▶ → "Generate data dictionary", select BANKDATA</li><li>Bob scans 29 COBOL programs, creates <code>bobz/DD.json</code></li><li>Add <code>Target Platform: IBM Z</code> to AGENTS.md</li></ol></td>
+      <td>Metadata DB in <code>.bobz/local-settings.json</code>; <code>bobz/DD.json</code> with 15 documented business variables; AGENTS.md updated<span class="insight">💬 2–3 days of project archaeology compressed to 10 minutes — new hires understand SORTCODE on day one.</span></td>
+      <td><span class="diff diff-medium">● Medium</span></td>
+      <td><div class="gain"><span class="gain-pct">~95%</span><div class="gain-bar"><div class="gain-fill" style="width:95%"></div></div></div></td>
+    </tr>
+    <tr>
+      <td class="ex-cell"><div class="ex-name">Exercise 2</div><div class="ex-desc">App Inventory &amp; Coding Standards</div></td>
+      <td><span class="mode-badge">🧰 Z Code</span><br/><span class="mode-label">Skills</span><div class="tag-group"><cds-tag type="teal" size="sm">/z-coding-standards-skill-builder</cds-tag></div><span class="mode-label" style="margin-top:.4rem">Tools</span><div class="tag-group"><cds-tag type="green" size="sm">execute_sql_query</cds-tag></div></td>
+      <td><ol class="steps"><li>Prompt for full CBSA inventory (programs, copybooks, BMS, DB2, VSAM)</li><li>Bob queries metadata DB → generates <code>docs/CBSA-INV*.md</code></li><li>Run <code>/z-coding-standards-skill-builder</code> (accept ZCodeScan)</li><li>Reload workspace; test skill on <code>BNK1CAC.cbl</code></li></ol></td>
+      <td>Inventory doc + <code>.bob/skills/cbsa-coding-standards/SKILL.md</code> with patterns, checklist, sample code; standards verified on a real program<span class="insight">💬 Standards auto-extracted from legacy code — every future program Bob generates matches our style automatically.</span></td>
+      <td><span class="diff diff-medium">● Medium</span></td>
+      <td><div class="gain"><span class="gain-pct">~95%</span><div class="gain-bar"><div class="gain-fill" style="width:95%"></div></div></div></td>
+    </tr>
+    <tr>
+      <td class="ex-cell"><div class="ex-name">Exercise 3</div><div class="ex-desc">Architecture Diagrams</div></td>
+      <td><span class="mode-badge">📐 Z Architect</span><br/><span class="mode-label">Tools</span><div class="tag-group"><cds-tag type="green" size="sm">execute_sql_query</cds-tag><cds-tag type="green" size="sm">Draw.io generation</cds-tag><cds-tag type="green" size="sm">Mermaid diagrams</cds-tag></div></td>
+      <td><ol class="steps"><li>"Build an architecture diagram (draw.io) illustrating program dependencies"</li><li>Refine with color/style prompts</li><li>"Create call graphs organized by functional topics"</li></ol></td>
+      <td><code>docs/CBSA-ARCHITECTURE.drawio</code> (4 layers: Presentation, Business, Data Access, External) + <code>docs/cbsa-call-graphs.md</code> with Mermaid call graphs per business domain<span class="insight">💬 2–3 days of Visio work in 5 minutes, editable and refinable with follow-up prompts.</span></td>
+      <td><span class="diff diff-medium">● Medium</span></td>
+      <td><div class="gain"><span class="gain-pct">~98%</span><div class="gain-bar"><div class="gain-fill" style="width:98%"></div></div></div></td>
+    </tr>
+    <tr>
+      <td class="ex-cell"><div class="ex-name">Exercise 4</div><div class="ex-desc">BANKDATA Documentation</div></td>
+      <td><span class="mode-badge">🧰 Z Code</span><br/><span class="mode-label">Workflow</span><div class="tag-group"><cds-tag type="purple" size="sm">Explain Code (docgen)</cds-tag></div><span class="mode-label" style="margin-top:.4rem">Tools</span><div class="tag-group"><cds-tag type="green" size="sm">persona_profile</cds-tag></div></td>
+      <td><ol class="steps"><li>Click ▶ → "Explain code", select BANKDATA.cbl</li><li>Choose persona: ARCHITECT, DEVELOPER, or BUSINESS</li><li>Ask Bob to save the explanation to a file</li></ol></td>
+      <td>Rich doc <code>docs/BANKDATA/BANKDATA-docu*.md</code> tailored to chosen persona, with data flows, error handling, VSAM &amp; DB2 dependencies<span class="insight">💬 Business, developer and architect views in &lt;15 min — managers finally understand BANKDATA without reading COBOL.</span></td>
+      <td><span class="diff diff-easy">● Easy</span></td>
+      <td><div class="gain"><span class="gain-pct">~99%</span><div class="gain-bar"><div class="gain-fill" style="width:99%"></div></div></div></td>
+    </tr>
+    <tr>
+      <td class="ex-cell"><div class="ex-name">Exercise 5a</div><div class="ex-desc">Business Rules Analysis</div></td>
+      <td><span class="mode-badge">🧰 Z Code</span><br/><span class="mode-label">Tools</span><div class="tag-group"><cds-tag type="green" size="sm">get_variables</cds-tag><cds-tag type="green" size="sm">execute_sql_query</cds-tag><cds-tag type="green" size="sm">edit_data_dictionary</cds-tag></div></td>
+      <td><ol class="steps"><li>"What variables are used in INQACCCU?" → DD updated (+13 entries)</li><li>"How is SORTCODE used in the application?"</li><li>"What is the architectural importance of SORTCODE?"</li></ol></td>
+      <td>Cross-program variable usage map; DD.json enriched to 28 entries; SORTCODE's role as composite key across all DB2 tables fully documented<span class="insight">💬 SORTCODE's role across every DB2 table discovered in 2 minutes instead of days of grep.</span></td>
+      <td><span class="diff diff-medium">● Medium</span></td>
+      <td><div class="gain"><span class="gain-pct">~90%</span><div class="gain-bar"><div class="gain-fill" style="width:90%"></div></div></div></td>
+    </tr>
+    <tr>
+      <td class="ex-cell"><div class="ex-name">Exercise 5b</div><div class="ex-desc">Business Rules + Inline Code Gen</div></td>
+      <td><span class="mode-badge">🧰 Z Code</span><br/><span class="mode-label">Workflow</span><div class="tag-group"><cds-tag type="purple" size="sm">Extract Business Rules</cds-tag></div><span class="mode-label" style="margin-top:.4rem">Tools</span><div class="tag-group"><cds-tag type="green" size="sm">Inline code gen</cds-tag><cds-tag type="green" size="sm">Correct with Bob</cds-tag></div></td>
+      <td><ol class="steps"><li>Extract &amp; save business rules from BNK1CAC.cbl</li><li>Cursor at line 458; right-click → IBM Bob → Add to Context</li><li>"add a test — customer number must start with 99"</li><li>Problems panel → right-click missing copybook → "Correct with Bob"</li></ol></td>
+      <td><code>BNK1CAC-business-rules.md</code> created; COBOL validation block inserted at line 459; BNK1CAM copybook regenerated from BMS; enhancement report produced<span class="insight">💬 Right-clicked a compiler error → Bob regenerated the missing copybook from the BMS definition. It also found a latent bug.</span></td>
+      <td><span class="diff diff-advanced">● Advanced</span></td>
+      <td><div class="gain"><span class="gain-pct">~85%</span><div class="gain-bar"><div class="gain-fill" style="width:85%"></div></div></div></td>
+    </tr>
+    <tr>
+      <td class="ex-cell"><div class="ex-name">Exercise 6</div><div class="ex-desc">Change Impact Analysis</div></td>
+      <td><span class="mode-badge">📐 Z Architect</span><br/><span class="mode-label">Skill</span><div class="tag-group"><cds-tag type="teal" size="sm">impact-analysis skill</cds-tag></div><span class="mode-label" style="margin-top:.4rem">Tools</span><div class="tag-group"><cds-tag type="green" size="sm">execute_sql_query</cds-tag><cds-tag type="green" size="sm">get_program_dependencies</cds-tag></div></td>
+      <td><ol class="steps"><li>"Analyze the impact of changing SORTCODE to support multiple bank branches"</li><li>Review structured impact report</li><li>Iterate with targeted variant prompts</li></ol></td>
+      <td><code>CBSA-archi-impact*.md</code>: executive summary (21/28 programs affected), current vs. target architecture, effort 6–9 weeks, risk matrix, migration plan<span class="insight">💬 A week of senior-architect interviews in 5 minutes — 13-section report pasted straight into our RFC template.</span></td>
+      <td><span class="diff diff-medium">● Medium</span></td>
+      <td><div class="gain"><span class="gain-pct">~95%</span><div class="gain-bar"><div class="gain-fill" style="width:95%"></div></div></div></td>
+    </tr>
+    <tr>
+      <td class="ex-cell"><div class="ex-name">Exercise 7</div><div class="ex-desc">User Journey Documentation</div></td>
+      <td><span class="mode-badge">🧰 Z Code</span><br/><span class="mode-label">Workflow</span><div class="tag-group"><cds-tag type="purple" size="sm">Explain Code</cds-tag></div></td>
+      <td><ol class="steps"><li>Prompt: create teller-facing user journey for account consultation</li><li>Optionally trace chain BNKMENU → BNK1CCA → INQACCCU</li></ol></td>
+      <td><code>CBSA-guide-Account consultation.md</code>: step-by-step guide, simulated 3270 screens, practical tips — no COBOL knowledge required<span class="insight">💬 3270 screen simulations accurate because Bob read the BMS maps — business analysts can use it without a developer escort.</span></td>
+      <td><span class="diff diff-easy">● Easy</span></td>
+      <td><div class="gain"><span class="gain-pct">~97%</span><div class="gain-bar"><div class="gain-fill" style="width:97%"></div></div></div></td>
+    </tr>
+    <tr>
+      <td class="ex-cell"><div class="ex-name">Exercise 8</div><div class="ex-desc">Email Search Feature</div></td>
+      <td><span class="mode-badge">📐 Z Architect</span> <span class="mode-badge">🧰 Z Code</span><br/><span class="mode-label">Skill</span><div class="tag-group"><cds-tag type="teal" size="sm">implementation-planning skill</cds-tag></div><span class="mode-label" style="margin-top:.4rem">Tools</span><div class="tag-group"><cds-tag type="green" size="sm">COBOL code gen</cds-tag></div></td>
+      <td><ol class="steps"><li>Z Architect: "What is the plan to implement customer search by email?"</li><li>Review plan (VSAM alternate index, DB2 LIKE query, new program)</li><li>Z Code: generate COBOL stub for new BNKINQE program</li></ol></td>
+      <td><code>CBSA-plan-email-search.md</code>: architecture decision, data migration, risk, roadmap; optional COBOL stub conforming to CBSA coding standards<span class="insight">💬 From feature request to plan + COBOL stub in 30 min — including VSAM alternate-index risks we hadn't considered.</span></td>
+      <td><span class="diff diff-advanced">● Advanced</span></td>
+      <td><div class="gain"><span class="gain-pct">~90%</span><div class="gain-bar"><div class="gain-fill" style="width:90%"></div></div></div></td>
+    </tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ══ LAB 2 ══ -->
+<section class="lab" aria-labelledby="l2">
+  <div class="lab__hdr">
+    <div class="lab__badge">2</div>
+    <div class="lab__title-block">
+      <div class="lab__title" id="l2">Complete CBSA Analysis with Bob for Z</div>
+      <div class="lab__sub">Full-stack: COBOL back-end + Java/React front-end + z/OS Connect (builds on Lab 1)</div>
+    </div>
+    <span class="lab__dur">⏱ 2–3 h · Intermediate</span>
+  </div>
+  <div class="dt-wrap"><table class="dt" aria-label="Lab 2">
+    <thead><tr>
+      <th style="width:11%">Exercise</th><th style="width:16%">Bob Mode &amp; Tools</th><th style="width:22%">User Actions</th><th style="width:28%">Expected Result</th><th style="width:8%">Difficulty</th><th style="width:9%">Gain</th>
+    </tr></thead>
+    <tbody>
+    <tr>
+      <td class="ex-cell"><div class="ex-name">Prep 0</div><div class="ex-desc">Frontend Clone</div></td>
+      <td><span class="mode-badge">💻 Agent</span><br/><span class="mode-label">Tools</span><div class="tag-group"><cds-tag type="green" size="sm">git sparse-checkout</cds-tag></div></td>
+      <td><ol class="steps"><li>Prompt Bob to clone &amp; copy 5 frontend directories from GitHub</li><li>Bob handles sparse clone &amp; cleanup automatically</li></ol></td>
+      <td>All 5 frontend source directories in workspace in &lt;5 min<span class="insight">💬 One prompt, five directories, zero manual steps.</span></td>
+      <td><span class="diff diff-easy">● Easy</span></td>
+      <td><div class="gain"><span class="gain-pct">~70%</span><div class="gain-bar"><div class="gain-fill" style="width:70%"></div></div></div></td>
+    </tr>
+    <tr>
+      <td class="ex-cell"><div class="ex-name">Exercise 1</div><div class="ex-desc">Init &amp; AGENTS.md</div></td>
+      <td><span class="mode-badge">🧰 Z Code</span><br/><span class="mode-label">Tools</span><div class="tag-group"><cds-tag type="green" size="sm">/init command</cds-tag></div></td>
+      <td><ol class="steps"><li>Run <code>/init</code> in a new task</li><li>Bob detects COBOL, JCL, Java 17, build scripts, DD location</li><li>Verify AGENTS.md sections</li></ol></td>
+      <td>AGENTS.md with workspace type, languages, build commands, directory structure, DD location, COBOL→docs mapping<span class="insight">💬 Java 17, Maven, COBOL and JCL all detected in one shot — AGENTS.md is now the single source of truth.</span></td>
+      <td><span class="diff diff-easy">● Easy</span></td>
+      <td><div class="gain"><span class="gain-pct">~90%</span><div class="gain-bar"><div class="gain-fill" style="width:90%"></div></div></div></td>
+    </tr>
+    <tr>
+      <td class="ex-cell"><div class="ex-name">Exercise 2</div><div class="ex-desc">Data Dictionary</div></td>
+      <td><span class="mode-badge">🧰 Z Code</span><br/><span class="mode-label">Workflow</span><div class="tag-group"><cds-tag type="purple" size="sm">Generate Data Dictionary</cds-tag></div><span class="mode-label" style="margin-top:.4rem">Tools</span><div class="tag-group"><cds-tag type="green" size="sm">scan_program</cds-tag><cds-tag type="green" size="sm">get_variables</cds-tag></div></td>
+      <td><ol class="steps"><li>"Create a data dictionary for the BNKMENU program"</li><li>Bob scans, extracts top 15 variables, generates descriptions, creates <code>bobz/DD.json</code></li></ol></td>
+      <td><code>bobz/DD.json</code> with 15 entries (COMM-EYE, COMM-CUSTNO…); each with short + long description and scope<span class="insight">💬 15 business-meaningful descriptions with no SME interview needed — ideal for migration assessments.</span></td>
+      <td><span class="diff diff-easy">● Easy</span></td>
+      <td><div class="gain"><span class="gain-pct">~95%</span><div class="gain-bar"><div class="gain-fill" style="width:95%"></div></div></div></td>
+    </tr>
+    <tr>
+      <td class="ex-cell"><div class="ex-name">Exercise 3</div><div class="ex-desc">COBOL Inventory</div></td>
+      <td><span class="mode-badge">🧰 Z Code</span><br/><span class="mode-label">Tools</span><div class="tag-group"><cds-tag type="green" size="sm">execute_sql_query</cds-tag><cds-tag type="green" size="sm">get_program_dependencies</cds-tag></div></td>
+      <td><ol class="steps"><li>"Make an inventory of all COBOL programs"</li><li>Review generated inventory document</li></ol></td>
+      <td><code>docs/COBOL_INVENTORY.md</code> — 29 programs classified by type, full dependency matrices, access modes, per-program descriptions (~800 lines)<span class="insight">💬 A week's work validated in 30 minutes — READ/WRITE access modes included.</span></td>
+      <td><span class="diff diff-easy">● Easy</span></td>
+      <td><div class="gain"><span class="gain-pct">~95%</span><div class="gain-bar"><div class="gain-fill" style="width:95%"></div></div></div></td>
+    </tr>
+    <tr>
+      <td class="ex-cell"><div class="ex-name">Exercise 4</div><div class="ex-desc">Frontend Inventory</div></td>
+      <td><span class="mode-badge">🧰 Z Code</span><br/><span class="mode-label">Tools</span><div class="tag-group"><cds-tag type="green" size="sm">Multi-language (Java, REST)</cds-tag></div></td>
+      <td><ol class="steps"><li>"Make an inventory of the front end"</li><li>Bob analyzes JAX-RS, JSON models, data access, COBOL interfaces</li></ol></td>
+      <td><code>docs/FRONTEND_INVENTORY.md</code> — 5 REST resources, 13 JSON models, 8 data-access classes, 8 COBOL interface classes (~600 lines)<span class="insight">💬 COBOL-to-REST API mapping in one document made the z/OS Connect integration review trivial.</span></td>
+      <td><span class="diff diff-medium">● Medium</span></td>
+      <td><div class="gain"><span class="gain-pct">~90%</span><div class="gain-bar"><div class="gain-fill" style="width:90%"></div></div></div></td>
+    </tr>
+    <tr>
+      <td class="ex-cell"><div class="ex-name">Exercise 5</div><div class="ex-desc">Architecture Diagrams (Full Stack)</div></td>
+      <td><span class="mode-badge">🧰 Z Code</span><br/><span class="mode-label">Tools</span><div class="tag-group"><cds-tag type="green" size="sm">Draw.io generation</cds-tag></div></td>
+      <td><ol class="steps"><li>"Generate a global diagram (draw.io) integrating front-end and back-end with layer distinction"</li><li>"Make a detailed diagram of the front end"</li></ol></td>
+      <td>Two Draw.io files: global 5-layer diagram (Presentation→REST→Business→Data Access→Storage) + detailed frontend diagram<span class="insight">💬 The 5-layer diagram was exec-presentation-ready — color-coded, arrowed, auto-generated.</span></td>
+      <td><span class="diff diff-medium">● Medium</span></td>
+      <td><div class="gain"><span class="gain-pct">~97%</span><div class="gain-bar"><div class="gain-fill" style="width:97%"></div></div></div></td>
+    </tr>
+    <tr>
+      <td class="ex-cell"><div class="ex-name">Exercise 6</div><div class="ex-desc">Local Transfer Analysis</div></td>
+      <td><span class="mode-badge">🧰 Z Code</span><br/><span class="mode-label">Workflow</span><div class="tag-group"><cds-tag type="purple" size="sm">Explain Code</cds-tag></div></td>
+      <td><ol class="steps"><li>"What does the Transfer local transaction consist of?"</li><li>Bob reads TransferLocalJSON.java, BNK1TFN.cbl, XFRFUN.cbl and synthesizes</li></ol></td>
+      <td>Full transaction flow: 3 components, ACID mechanics, deadlock prevention, 4 error codes, SYNCPOINT/ROLLBACK in plain language<span class="insight">💬 The anti-deadlock ordering strategy in XFRFUN explained by reading Java and COBOL simultaneously — a first.</span></td>
+      <td><span class="diff diff-easy">● Easy</span></td>
+      <td><div class="gain"><span class="gain-pct">~85%</span><div class="gain-bar"><div class="gain-fill" style="width:85%"></div></div></div></td>
+    </tr>
+    <tr>
+      <td class="ex-cell"><div class="ex-name">Exercise 7</div><div class="ex-desc">User Guide</div></td>
+      <td><span class="mode-badge">🧰 Z Code</span><br/><span class="mode-label">Workflow</span><div class="tag-group"><cds-tag type="purple" size="sm">Explain Code / Docgen</cds-tag></div></td>
+      <td><ol class="steps"><li>"Make me a user guide for local transfer"</li><li>Bob generates multi-interface guide (BMS 3270, Web, REST API)</li></ol></td>
+      <td><code>USER_GUIDE_LOCAL_TRANSFER.md</code> (~500 lines): 4-step procedure per interface, 6 error messages + solutions, 3 scenarios, 8-question FAQ<span class="insight">💬 500 lines covering BMS, web and REST — shipped as-is after a 30-minute review by the technical writer.</span></td>
+      <td><span class="diff diff-easy">● Easy</span></td>
+      <td><div class="gain"><span class="gain-pct">~97%</span><div class="gain-bar"><div class="gain-fill" style="width:97%"></div></div></div></td>
+    </tr>
+    <tr>
+      <td class="ex-cell"><div class="ex-name">Exercise 8</div><div class="ex-desc">Credit Score Analysis</div></td>
+      <td><span class="mode-badge">🧰 Z Code</span><br/><span class="mode-label">Workflow</span><div class="tag-group"><cds-tag type="purple" size="sm">Explain Code</cds-tag></div><span class="mode-label" style="margin-top:.4rem">Tools</span><div class="tag-group"><cds-tag type="green" size="sm">JCICS async API analysis</cds-tag></div></td>
+      <td><ol class="steps"><li>"What does the Credit Score function do?"</li><li>"What is the credit score value scale?"</li><li>Validate architecture (5 async agencies, getAny() pattern, fallback)</li></ol></td>
+      <td>3-tier async architecture explained; 1–999 score scale with calculation formula; comparison to real-world credit bureaus<span class="insight">💬 The JCICS getAny() pattern and CICS &lt;5.4 fallback explained in plain English — a former black box now fully understood.</span></td>
+      <td><span class="diff diff-medium">● Medium</span></td>
+      <td><div class="gain"><span class="gain-pct">~80%</span><div class="gain-bar"><div class="gain-fill" style="width:80%"></div></div></div></td>
+    </tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ══ LAB 3 ══ -->
+<section class="lab" aria-labelledby="l3">
+  <div class="lab__hdr">
+    <div class="lab__badge">3</div>
+    <div class="lab__title-block">
+      <div class="lab__title" id="l3">Advanced: Coding Standard Skill &amp; VSAM→DB2 Refactoring</div>
+      <div class="lab__sub">Build reusable skills from existing code; modernize VSAM to DB2 using the interactive /refactor command</div>
+    </div>
+    <span class="lab__dur">⏱ 1–2 h · Advanced</span>
+  </div>
+  <div class="dt-wrap"><table class="dt" aria-label="Lab 3">
+    <thead><tr>
+      <th style="width:11%">Exercise</th><th style="width:16%">Bob Mode &amp; Tools</th><th style="width:22%">User Actions</th><th style="width:28%">Expected Result</th><th style="width:8%">Difficulty</th><th style="width:9%">Gain</th>
+    </tr></thead>
+    <tbody>
+    <tr>
+      <td class="ex-cell"><div class="ex-name">Exercise 1</div><div class="ex-desc">Custom Coding Standard Skill</div></td>
+      <td><span class="mode-badge">🧰 Z Code</span><br/><span class="mode-label">Skill</span><div class="tag-group"><cds-tag type="teal" size="sm">/z-coding-standards-skill-builder</cds-tag><cds-tag type="teal" size="sm">create-skill</cds-tag></div></td>
+      <td><ol class="steps"><li>"Generate a coding standard skill by analyzing existing COBOL programs"</li><li>Optionally customize rules (e.g. CTR- prefix for counters)</li><li>Prompt Bob to generate a new compliant COBOL program</li><li>Verify generated code follows conventions</li></ol></td>
+      <td><code>.bob/skills/</code> with <code>CBSA-standards-reference.md</code>, <code>CBSA-example.md</code>, <code>skills.md</code>; new BNKINQE.cbl fully compliant with extracted standards<span class="insight">💬 3 days of manual standards documentation in 2 minutes — every future Bob-generated program respects them automatically.</span></td>
+      <td><span class="diff diff-advanced">● Advanced</span></td>
+      <td><div class="gain"><span class="gain-pct">~99%</span><div class="gain-bar"><div class="gain-fill" style="width:99%"></div></div></div></td>
+    </tr>
+    <tr>
+      <td class="ex-cell"><div class="ex-name">Exercise 2</div><div class="ex-desc">VSAM→DB2 Refactoring</div></td>
+      <td><span class="mode-badge">📐 Z Architect</span> <span class="mode-badge">🧰 Z Code</span><br/><span class="mode-label">Workflow</span><div class="tag-group"><cds-tag type="purple" size="sm">Refactor COBOL Program</cds-tag></div><span class="mode-label" style="margin-top:.4rem">Skill</span><div class="tag-group"><cds-tag type="teal" size="sm">/refactor command</cds-tag></div><span class="mode-label" style="margin-top:.4rem">Tools</span><div class="tag-group"><cds-tag type="green" size="sm">get_program_dependencies</cds-tag></div></td>
+      <td><ol class="steps"><li>Z Architect: create <code>extractionGoal.md</code> with 10 migration principles</li><li>Analyze INQCUST VSAM operations &amp; data structures</li><li>Design DB2 DDL (table, indexes, constraints)</li><li>Run <code>/refactor INQCUST.cbl extractionGoal.md</code> (interactive 4-phase)</li><li>Request full migration plan (5 phases + rollback)</li></ol></td>
+      <td>Refactored INQCUST with all VSAM replaced by SQL cursors; DDL scripts; COMMAREA preserved; 5-phase migration plan with rollback strategy<span class="insight">💬 3–4 weeks of migration work in 75 minutes — interactive /refactor kept the developer in control at every step.</span></td>
+      <td><span class="diff diff-advanced">● Advanced</span></td>
+      <td><div class="gain"><span class="gain-pct">~95%</span><div class="gain-bar"><div class="gain-fill" style="width:95%"></div></div></div></td>
+    </tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ══ LAB 4 ══ -->
+<section class="lab" aria-labelledby="l4">
+  <div class="lab__hdr">
+    <div class="lab__badge">4</div>
+    <div class="lab__title-block">
+      <div class="lab__title" id="l4">Static SQL Optimization &amp; Db2 for z/OS</div>
+      <div class="lab__sub">SQL inventory, anti-pattern detection, DDL reverse engineering, ERD, performance recommendations, Draw.io physical storage diagrams</div>
+    </div>
+    <span class="lab__dur">⏱ 1–2 h · Intermediate → Advanced</span>
+  </div>
+  <div class="dt-wrap"><table class="dt" aria-label="Lab 4">
+    <thead><tr>
+      <th style="width:11%">Exercise</th><th style="width:16%">Bob Mode &amp; Tools</th><th style="width:22%">User Actions</th><th style="width:28%">Expected Result</th><th style="width:8%">Difficulty</th><th style="width:9%">Gain</th>
+    </tr></thead>
+    <tbody>
+    <tr>
+      <td class="ex-cell"><div class="ex-name">Exercise 1</div><div class="ex-desc">SQL Inventory &amp; Anti-patterns</div></td>
+      <td><span class="mode-badge">🧰 Z Code</span><br/><span class="mode-label">Tools</span><div class="tag-group"><cds-tag type="green" size="sm">execute_sql_query</cds-tag><cds-tag type="green" size="sm">cross-file analysis</cds-tag></div></td>
+      <td><ol class="steps"><li>"Create a md report about SQL statements in the application"</li><li>Bob scans all COBOL modules, lists EXEC SQL blocks, flags anti-patterns</li></ol></td>
+      <td><code>CBSA-analysis-sql-statements.md</code> — 10 modules, anti-patterns flagged: CONTROL hotspot, full-row rewrites in DBCRFUN/XFRFUN, single-row fetch in INQACCCU, cursor overhead in INQACC<span class="insight">💬 A concurrency hotspot only a seasoned DB2 DBA would catch — found instantly across 10 COBOL modules.</span></td>
+      <td><span class="diff diff-easy">● Easy</span></td>
+      <td><div class="gain"><span class="gain-pct">~90%</span><div class="gain-bar"><div class="gain-fill" style="width:90%"></div></div></div></td>
+    </tr>
+    <tr>
+      <td class="ex-cell"><div class="ex-name">Exercise 2</div><div class="ex-desc">Retrieve DDL JCLs</div></td>
+      <td><span class="mode-badge">💻 Agent</span><br/><span class="mode-label">Tools</span><div class="tag-group"><cds-tag type="green" size="sm">git sparse-checkout</cds-tag></div></td>
+      <td><ol class="steps"><li>Prompt Bob to clone &amp; copy <code>CBSA/etc/install/base/db2jcl</code> from GitHub</li><li>Bob handles sparse clone, copy to <code>db2jcl/</code>, cleanup</li></ol></td>
+      <td><code>db2jcl/</code> with all DDL JCL scripts (CRETB01–04) available for analysis<span class="insight">💬 One prompt to retrieve JCL scripts from a specific GitHub sub-path.</span></td>
+      <td><span class="diff diff-easy">● Easy</span></td>
+      <td><div class="gain"><span class="gain-pct">~70%</span><div class="gain-bar"><div class="gain-fill" style="width:70%"></div></div></div></td>
+    </tr>
+    <tr>
+      <td class="ex-cell"><div class="ex-name">Exercise 3</div><div class="ex-desc">ERD from DDL</div></td>
+      <td><span class="mode-badge">🧰 Z Code</span><br/><span class="mode-label">Tools</span><div class="tag-group"><cds-tag type="green" size="sm">Mermaid ER diagram</cds-tag><cds-tag type="green" size="sm">JCL DDL parsing</cds-tag></div></td>
+      <td><ol class="steps"><li>"Using DDL files in @db2jcl create an entity relationship diagram"</li><li>Bob parses JCL DDL → Mermaid ERD + storage hierarchy</li></ol></td>
+      <td><code>CBSA-archi-database-erd.md</code>: Mermaid ERD (ACCOUNT 1:N PROCTRAN) + storage hierarchy (Storage Groups→Tablespaces→Tables→Indexes)<span class="insight">💬 Reverse-engineering a Db2 z/OS ERD from JCL DDL — relationships inferred and diagrammed without a dedicated tool.</span></td>
+      <td><span class="diff diff-medium">● Medium</span></td>
+      <td><div class="gain"><span class="gain-pct">~95%</span><div class="gain-bar"><div class="gain-fill" style="width:95%"></div></div></div></td>
+    </tr>
+    <tr>
+      <td class="ex-cell"><div class="ex-name">Exercise 4</div><div class="ex-desc">Full-Stack Performance Analysis</div></td>
+      <td><span class="mode-badge">🧰 Z Code</span><br/><span class="mode-label">Tools</span><div class="tag-group"><cds-tag type="green" size="sm">execute_sql_query</cds-tag><cds-tag type="green" size="sm">Cross-file DDL+SQL analysis</cds-tag></div></td>
+      <td><ol class="steps"><li>"Identify all potential performance improvements in SQL and database definition"</li><li>Bob cross-references DDL and embedded SQL to find mismatches</li></ol></td>
+      <td><code>CBSA-analysis-db2-performance-improvements.md</code>: missing PROCTRAN index, CONTROL locking→DB2 SEQUENCE, UTS tablespace, Multi-Row Fetch, singleton SELECT, canonical lock ordering<span class="insight">💬 Full-stack DDL + SQL correlation across 10 programs — normally needs a DBA and a developer in the same room for days.</span></td>
+      <td><span class="diff diff-advanced">● Advanced</span></td>
+      <td><div class="gain"><span class="gain-pct">~85%</span><div class="gain-bar"><div class="gain-fill" style="width:85%"></div></div></div></td>
+    </tr>
+    <tr>
+      <td class="ex-cell"><div class="ex-name">Exercise 5</div><div class="ex-desc">Apply Fix — Create Missing Index</div></td>
+      <td><span class="mode-badge">🧰 Z Code</span><br/><span class="mode-label">Tools</span><div class="tag-group"><cds-tag type="green" size="sm">JCL generation</cds-tag></div></td>
+      <td><ol class="steps"><li>"Create a new JCL to create the missing index on PROCTRAN as per §3.1 of the performance report"</li><li>Verify generated JCL content and index definition</li></ol></td>
+      <td><code>db2jcl/CREI401.jcl</code> with <code>CREATE INDEX IBMUSER.PROCTRAN_IX1</code> as composite clustering index on SORTCODE, NUMBER, DATE, TIME — ready to submit<span class="insight">💬 From identifying the missing index to a ready-to-submit JCL in one follow-up prompt.</span></td>
+      <td><span class="diff diff-medium">● Medium</span></td>
+      <td><div class="gain"><span class="gain-pct">~80%</span><div class="gain-bar"><div class="gain-fill" style="width:80%"></div></div></div></td>
+    </tr>
+    <tr>
+      <td class="ex-cell"><div class="ex-name">Exercise 6</div><div class="ex-desc">Physical Storage Diagram</div></td>
+      <td><span class="mode-badge">📐 Z Architect</span><br/><span class="mode-label">Tools</span><div class="tag-group"><cds-tag type="green" size="sm">Draw.io generation</cds-tag></div></td>
+      <td><ol class="steps"><li>"Create a draw.io chart for the Physical Storage Hierarchy in @graph/CBSA-archi-database-erd.md"</li><li>Open file in Draw.io VSCode extension to verify</li></ol></td>
+      <td><code>CBSA-archi-physical-storage-hierarchy.drawio</code>: Database→Storage Groups→Tablespaces→Tables→Indexes with buffer pool labels and VCAT info<span class="insight">💬 Infrastructure team finally has a visual for architecture reviews — no JCL syntax explanation required.</span></td>
+      <td><span class="diff diff-medium">● Medium</span></td>
+      <td><div class="gain"><span class="gain-pct">~90%</span><div class="gain-bar"><div class="gain-fill" style="width:90%"></div></div></div></td>
+    </tr>
+    </tbody>
+  </table></div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <strong>IBM Bob4Z-a-thon</strong>
+  <span class="foot-sep">|</span><span>IBM Bob Premium Package for Z</span>
+  <span class="foot-sep">|</span><span>IBM CE EMEA Team · 2026</span>
+  <span class="foot-sep">|</span><span>CBSA · IBM z/OS · CICS · Db2 · Enterprise COBOL</span>
+</footer>
+</body>
+</html>
