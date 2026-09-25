@@ -13,11 +13,8 @@ layout: null
 <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
-<div class="page-clip">
 
-<canvas id="stars-canvas"></canvas>
-
-<!-- ═══ THEME TOGGLE ═══════════════════════════════════════ -->
+<!-- ═══ THEME TOGGLE — outside any overflow container ══════ -->
 <button class="theme-toggle" id="theme-toggle-btn" aria-label="Toggle light/dark mode">
   <!-- Moon icon (shown in dark mode) -->
   <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -36,6 +33,9 @@ layout: null
     <line x1="18.36" y1="5.64"  x2="19.78" y2="4.22"/>
   </svg>
 </button>
+
+<div class="page-clip">
+<canvas id="stars-canvas"></canvas>
 
 <!-- ═══ HERO ═════════════════════════════════════════════ -->
 <section class="hero">
